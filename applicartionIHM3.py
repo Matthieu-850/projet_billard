@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QApplication, QWidget #QPixmap
 import numpy as np
 #from QtGui import QMatrix
 #from PySide2 import QtGui
+import time
 
 
 # l'approche par héritage simple de la classe QMainWindow (même type de notre fenêtre
@@ -37,6 +38,7 @@ class MonAppli(QtWidgets.QMainWindow):
         self.ui.con.setPalette(pal)
 
         self.painter = QtGui.QPainter()
+        self.painter2 = QtGui.QPainter()
         #self.ui.con.update = self.drawEcosysteme1
         self.ui.con.paintEvent = self.drawEcosysteme1
 
@@ -48,6 +50,8 @@ class MonAppli(QtWidgets.QMainWindow):
         self.bande_n, self.bande_o, self.bande_e, self.bande_s = 76.2, 76.2, 76.2, 51.3  # epaisseurs des bandes sur notre image de table
         self.ehfw, self.egfw = 10, 10  # ecart haut fenetre - widget, ecart gauche fenetre - widget
         self.by, self.bx = self.hw - self.bande_n - self.bande_s, self.lw - self.bande_e - self.bande_o  # taille du tapis, correspondent à self.bn et self.be dans la classe plateau
+        self.xp,self.yp, self.xr,self.yr = 0,0,0,0
+
 
         self.table = Partie(10, 0.005, self.bx, self.by)
         for bal in self.table.plat :
@@ -67,9 +71,9 @@ class MonAppli(QtWidgets.QMainWindow):
         #self.demarrer()
 
         qp = self.painter
-        qp.begin(self.ui.con)
-        self.table.plat.queue.dessinimage(qp)
-        qp.end()
+        #self.painter2.begin(self.ui.con)
+        #self.table.plat.queue.dessinimage(self.painter2,self.table.plat.queue.alpha)
+        #self.painter2.end()
 
     def processInputFile1 (self):
         if any(self.T):  # t < 15:  # 15 est arbitraire et modulable
@@ -94,10 +98,11 @@ class MonAppli(QtWidgets.QMainWindow):
             for i in range(self.table.plat.n):
                 self.table.plat[i].vx, self.table.plat[i].vy = 0, 0
 
-            if self.TEST[0] - self.table.plat[self.i % 2 - 1].vx == 0 and self.TEST[1] - self.table.plat[self.i % 2 - 1].vy and self.TEST[2] - \
-                self.table.plat[self.i % 2 - 2].vx == 0 and self.TEST[3] - self.table.plat[self.i % 2 - 3].vy == 0:
+            if self.TEST[0] - self.table.plat[self.i % 2 - 1].x != 0 and self.TEST[1] - self.table.plat[self.i % 2 - 1].y  !=0 and self.TEST[2] - \
+                self.table.plat[self.i % 2 - 2].x != 0 and self.TEST[3] - self.table.plat[self.i % 2 - 2].y != 0:
                 print("Vous avez marqué un point")
                 self.table.points[self.i % 2] += 1
+
             else:
                 print("Pas de chance... Au joueur suivant")
                 self.i += 1
@@ -157,13 +162,20 @@ class MonAppli(QtWidgets.QMainWindow):
         print ("tour {}".format (self.table.c))
         if self.table.c < self.table.nb_coups :
             self.table.c+=1
-            self.TEST = [self.table.plat[self.i%2 -1].vx,self.table.plat[self.i%2 -1].vy, self.table.plat[self.i%2 -2].vx, self.table.plat[self.i%2 -2].vy]
+            x1, y1, x2, y2 = self.table.plat[self.i%2 -1].x, self.table.plat[self.i%2 -1].y, self.table.plat[self.i%2 -2].x, self.table.plat[self.i%2 -2].y
+            self.TEST = [x1, y1, x2, y2] #liste contenant les positions de boules non tapees juste avant le coup
 
             #self.table.plat.un_coup (self.plat, self.dt, self.c,i %2)
             print("c'est au joueur {} de jouer".format(self.i%2))
             self.T = np.array([1 for i in range(self.table.plat.n)])
             #Boule_blanche.impulsion(self.table.plat[self.i%2], int(input("cap")), float(input("Vitesse")))  # 1 boule blanche
-            Boule_blanche.impulsion(self.table.plat[self.i % 2], 35, 400)  # 1 boule blanche
+
+            #while self.table.plat.queue.p == 0 :
+            #    pass
+
+            #Boule_blanche.impulsion(self.table.plat[self.i % 2], 35, 400)  # 1 boule blanche
+            Boule_blanche.impulsion(self.table.plat[self.i % 2], self.table.plat.queue.alpha, self.table.plat.queue.p)
+            self.table.plat.queue.p = 0
             self.t = 0
             self.posx, self.posy = [[] for i in range(self.table.plat.n)], [[] for i in
                                                        range(self.table.plat.n)]  # pour garder en mémoire les positions passées
@@ -197,11 +209,22 @@ class MonAppli(QtWidgets.QMainWindow):
     def drawEcosysteme1(self,*args):
         qp = self.painter
         qp.begin(self.ui.con)
+        self.painter2.begin (self.ui.con)
+
+
+        for boullle in self.table.plat:
+             #ins.dessin(qp)
+             boullle.dessinimage(qp)
+             #QtGui.QPainter().drawImage(QtCore.QRect(10 + 40 + boullle.x, 701 - boullle.y + 10 + 76.2, 20, 20), QtGui.QImage("blanche.jpg"))
+             #print (self.egfw+self.bande_o+ boullle.x , boullle.y + self.ehfw + self.bande_s)    #10+ 76.2 + (51.3 + 90)+ (621 - ins.y))
+        #print ("tructruc")
+
+
         if self.table.plat.queue.p == 0 :
 
             #self.table.plat.queue.dessinimage (qp)
-            boulex, bouley = self.table.plat[self.i % 2].x , self.table.plat[self.i % 2].y
-            dx, dy = self.table.plat.queue.x - boulex , self.table.plat.queue.x - boulex
+            boulex, bouley = self.table.plat[self.i % 2].x + 90, self.table.plat[self.i % 2].y + 88.2
+            dx, dy = self.table.plat.queue.x -6 - boulex, self.table.plat.queue.y-38 - bouley
             if dx == 0:
                 if dy < 0:
                     angle_b1 = -np.pi / 2
@@ -221,21 +244,18 @@ class MonAppli(QtWidgets.QMainWindow):
                     angle_b1 = np.pi - np.arctan(abs(dy / dx))
                 else:
                     angle_b1 = np.pi + np.arctan(abs(dy / dx))
-            self.alpha = angle_b1
+            #self.table.plat.queue.alpha =(angle_b1 + np.pi) % 2*np.pi
             #Image = QtGui.QImage("queue_billard2.png").transformed(PySide2.QtGui.QMatrix().rotate(angle_b1))
             #Image = QtGui.QImage("queue_billard2.png").\
-
-            #self.painter.rotate(angle_b1)
+            #self.painter.rotate(0)
+            angle = ((self.table.plat.queue.alpha)*180/np.pi)%(2*np.pi)
+            #self.painter2.rotate(angle)
+            #self.painter2.translate(self.rect().bottomRight())
+            #self.painter2.rotate(-63)
             #PySide2.QtGui.QMatrix.rotate(angle_b1)
-            self.table.plat.queue.dessinimage(qp)
-
-
-        for boullle in self.table.plat:
-             #ins.dessin(qp)
-             boullle.dessinimage(qp)
-             #QtGui.QPainter().drawImage(QtCore.QRect(10 + 40 + boullle.x, 701 - boullle.y + 10 + 76.2, 20, 20), QtGui.QImage("blanche.jpg"))
-             #print (self.egfw+self.bande_o+ boullle.x , boullle.y + self.ehfw + self.bande_s)    #10+ 76.2 + (51.3 + 90)+ (621 - ins.y))
-        #print ("tructruc")
+            self.table.plat.queue.dessinimage(self.painter2 ,angle , boulex,bouley)
+            #self.painter2.rotate(0)
+        self.painter2.end()
         qp.end()
 
     def drawEcosysteme(self,*args):
@@ -250,11 +270,11 @@ class MonAppli(QtWidgets.QMainWindow):
                 self.painter.drawEllipse(ins.x, ins.y, 10, 5)
 
     def mousePressEvent (self,event):
-        self.x = event.x()
-        self.y = event.y()
+        self.xp = event.x()
+        self.yp = event.y()  #coordonnees du point de debut de cliquage (press)
         print (event.pos(), event.x(), event.y(), "laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" )
 
-    def mouseMoveEvent (self,event):
+    def mouseMoveEvent (self,event): #affichage en direct des coordonnées (aide pour les tests)
         self.table.plat.queue.x = event.x()
         self.table.plat.queue.y = event.y()
         self.ui.con.update ()
@@ -265,8 +285,41 @@ class MonAppli(QtWidgets.QMainWindow):
         print (event.pos(), event.x(), event.y(), "looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" )
 
     def mouseReleaseEvent (self,event):
-        self.x = event.x()
-        self.y = event.y()
+        self.xr = event.x()
+        self.yr = event.y() #coordonnees du point de fin de cliquage (release)
+
+        dx, dy = self.xr - self.xp, self.yr - self.yp
+
+        if dx == 0:
+            if dy < 0:
+                angle_b1 = -np.pi / 2
+            else:
+                angle_b1 = np.pi / 2
+        elif dy == 0:
+            if dx > 0:
+                angle_b1 = 0  #############
+            else:
+                angle_b1 = -np.pi
+        else:
+            if dy > 0 and dx > 0:
+                angle_b1 = np.pi+  np.arctan(dy / dx)  # angle_b1 direction de la boule mobile
+            elif dy < 0 and dx > 0:
+                angle_b1 = ( np.pi -np.arctan(abs(dy / dx))) % (2 * np.pi)
+            elif dy > 0 and dx < 0:
+                angle_b1 = - np.arctan(abs(dy / dx))
+            else:
+                angle_b1 =  np.arctan(abs(dy / dx))
+
+
+
+           # elif dy < 0 and dx > 0 :
+           #     angle_b1 = (np.pi + np.arctan(abs (dy / dx)))
+           # elif dy > 0 and dx < 0 :
+           #     angle_b1 = np.arctan(-dy / dx)
+
+
+        self.table.plat.queue.alpha = angle_b1*180/np.pi
+        self.table.plat.queue.p = (dx**2 + dy**2) * 0.1
         print (event.pos(), event.x(), event.y(), "lppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp" )
 
 
