@@ -1,8 +1,8 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic #QPixmap
 #from QPixmap import QMatrix
-from interface5 import Ui_mainWindow
-from projet_8 import Partie, Boule_blanche, Boule, Plateau
+from interfaceBon import Ui_mainWindow
+from projet_8_GitHub import Partie, Boule_blanche, Boule, Plateau
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget #QPixmap
 import numpy as np
