@@ -122,8 +122,7 @@ class Boule(metaclass = ABCMeta):  # une boule (blanche ou colorée), ses caract
         print ("angle :", d_angle*180/np.pi, self.vx,self.vy,v1_p, v2_p)
 
 
-class Boule_coloree(
-    Boule):  # on définit la classe représentant les boules colorées, classe qui hérite de la classe boule
+class Boule_coloree(Boule):  # on définit la classe représentant les boules colorées, classe qui hérite de la classe boule
     image = QtGui.QImage("rouger.png")
     def __init__(self, x, y, r = 0.03):
         super().__init__(x, y,r)
