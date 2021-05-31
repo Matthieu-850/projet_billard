@@ -21,26 +21,11 @@ class Ui_mainWindow(object):
         icon.addPixmap(QtGui.QPixmap("C:\\WPy64-3760\\python-3.7.6.amd64\\../../OneDrive - Ecole Nationale Supérieure de Techniques Avancées Bretagne/UE 2.4-projet/Sujet 05 - Billard/tablelogo.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         mainWindow.setWindowIcon(icon)
 
-        #zoneCentrale = QWidget ()
-
-         #nom = QLineEdit(self.ui)
-        #prenom = QLineEdit(self.ui)
-        #age = QLineEdit(self.ui)
-
-        #layout = QFormLayout()
-        #layout.addRow("Votre nom", nom)
-        #layout.addRow("Votre prénom", prenom)
-        #layout.addRow("Votre âge", age)
-        #zoneCentrale.setLayout(layout)
-        #self.setCentralWidget(zoneCentrale)
-
-
-
         mainWindow.setDockNestingEnabled(False)
         self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 720, 1071, 50))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 720, 1071, 70))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -110,111 +95,7 @@ class Ui_mainWindow(object):
         self.actionQuitter.setText(_translate("mainWindow", "Quitter"))
 
 
-class Ui_mainWindow2(QtWidgets.QMainWindow):
-    def setupUi2(self, mainWindow):
-        mainWindow.setObjectName("mainWindow")
-        mainWindow.setWindowModality(QtCore.Qt.NonModal)
-        mainWindow.resize(500, 300)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("C:\\WPy64-3760\\python-3.7.6.amd64\\../../OneDrive - Ecole Nationale Supérieure de Techniques Avancées Bretagne/UE 2.4-projet/Sujet 05 - Billard/tablelogo.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        mainWindow.setWindowIcon(icon)
-
-        #zoneCentrale = QWidget ()
-
-         #nom = QLineEdit(self.ui)
-        #prenom = QLineEdit(self.ui)
-        #age = QLineEdit(self.ui)
-
-        #layout = QFormLayout()
-        #layout.addRow("Votre nom", nom)
-        #layout.addRow("Votre prénom", prenom)
-        #layout.addRow("Votre âge", age)
-        #zoneCentrale.setLayout(layout)
-        #self.setCentralWidget(zoneCentrale)
-
-
-
-        mainWindow.setDockNestingEnabled(False)
-        self.centralwidget = QtWidgets.QWidget(mainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 180, 450, 45))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.Plateau = QtWidgets.QWidget(self.horizontalLayoutWidget)
-        self.Plateau.setObjectName("Plateau")
-        self.horizontalLayout_2.addWidget(self.Plateau)
-        self.Bouton_Demarrer = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.Bouton_Demarrer.setObjectName("Bouton_Demarrer")
-        self.horizontalLayout_2.addWidget(self.Bouton_Demarrer)
-        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
-        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label.setObjectName("label")
-        self.horizontalLayout_2.addWidget(self.label)
-        #spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        #self.horizontalLayout_2.addItem(spacerItem1)
-        self.Bouton_Quitter = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.Bouton_Quitter.setObjectName("Bouton_Quitter")
-        self.horizontalLayout_2.addWidget(self.Bouton_Quitter)
-
-
-
-        self.centralwidget.setGeometry(QtCore.QRect(20, 20, 300, 251))
-        self.centralwidget.setObjectName("con")
-        mainWindow.setCentralWidget(self.centralwidget)
-
-        self.prenom1 = QLineEdit(self)
-        self.prenom2 = QLineEdit(self)
-        self.layout = QFormLayout()
-        self.layout.addRow("prénom du joueur 1 ", self.prenom1)
-        self.layout.addRow("Prénom du joueur 2", self.prenom2)
-        self.con.setLayout(self.layout)
-        self.setCentralWidget(self.con)
-
-
-        self.menubar = QtWidgets.QMenuBar(mainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1123, 26))
-        self.menubar.setObjectName("menubar")
-        self.menuMenu = QtWidgets.QMenu(self.menubar)
-        self.menuMenu.setObjectName("menuMenu")
-        mainWindow.setMenuBar(self.menubar)
-
-
-        self.statusbar = QtWidgets.QStatusBar(mainWindow)
-        self.statusbar.setObjectName("statusbar")
-        mainWindow.setStatusBar(self.statusbar)
-
-
-        self.actionQuitter = QtWidgets.QAction(mainWindow)
-        self.actionQuitter.setObjectName("Entrer")
-        self.menuMenu.addAction(self.actionQuitter)
-        self.menubar.addAction(self.menuMenu.menuAction())
-
-        self.retranslateUi2(mainWindow)
-
-        self.Bouton_Quitter.clicked.connect(mainWindow.close)
-        self.actionQuitter.triggered.connect(mainWindow.close)
-
-        QtCore.QMetaObject.connectSlotsByName(mainWindow)
-
-    def retranslateUi2(self, mainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        mainWindow.setWindowTitle(_translate("mainWindow", "Table de billard"))
-        self.Bouton_Demarrer.setText(_translate("mainWindow", "Démarrer"))
-        self.label.setText(_translate("mainWindow", "     A vous de jouer  !             "))
-        self.Bouton_Quitter.setText(_translate("mainWindow","Entrer"))
-        self.menuMenu.setTitle(_translate("mainWindow", "Menu"))
-        self.actionQuitter.setText(_translate("mainWindow", "Quitter"))
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = Ui_mainWindow()
-    #fen = MaFenetre ()
-    #t = Ui_mainWindow2()
-    #t.show()
-    #window.show()
-    #fen.show()
     app.exec_()
