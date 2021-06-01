@@ -58,7 +58,7 @@ class MonAppli(QtWidgets.QMainWindow):
         self.lw =  self.ui.con.width()   #1101# (x) largeur du widget
         print("selon les x",self.lw, "  selon les y", self.hw)
 
-        self.bande_n, self.bande_o, self.bande_e, self.bande_s = 76.2, 76.2, 76.2, 68  # epaisseurs des bandes sur notre image de table
+        self.bande_n, self.bande_o, self.bande_e, self.bande_s = 76.2, 76.2, 76.2, 72  # epaisseurs des bandes sur notre image de table
         self.ehfw, self.egfw = 10, 10  # ecart haut fenetre - widget, ecart gauche fenetre - widget
         self.by, self.bx = self.hw - self.bande_n - self.bande_s, self.lw - self.bande_e - self.bande_o  # taille du tapis, correspondent à self.bn et self.be dans la classe plateau
 
@@ -95,7 +95,7 @@ class MonAppli(QtWidgets.QMainWindow):
         #font = self.ui.label.font()  # lineedit current font
         #font.setPointSize(11)  # change it's size
         #self.ui.label.setFont(font)
-        self.ui.label.setFont(QFont ('Calibri',12))
+        self.ui.label.setFont(QFont ('Calibri',10.5))
         #self.ui.label.setFixedWidth(3000)
 
 
@@ -177,7 +177,7 @@ class MonAppli(QtWidgets.QMainWindow):
                 else:
                     g = 1
                 self.ui.label.setText(
-                    "{} : {} points \n{} : {} points. \n{} a gagné ! Félicitations ! ".format(self.joueurs [1],
+                    "{} : {} points, {} : {} points. \n{} a gagné ! Félicitations ! ".format(self.joueurs [1],
                         self.table.points[1], self.joueurs[0], self.table.points[0], self.joueurs[g]))
                 print("Le joueur {} a gagné ! Félicitations !".format(g))
                 self.ui.label.show()

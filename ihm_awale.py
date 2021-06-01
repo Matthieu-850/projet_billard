@@ -13,8 +13,9 @@ class Window_Menu (QtWidgets.QMainWindow) :
     def __init__(self, *args, **kwargs):
         super(Window_Menu, self).__init__(*args, **kwargs)
 
+
         self.setWindowTitle("Entrez vos prénoms")  # titre de la fenaitre
-        self.setFixedSize(400, 400)  # taille de la fenaitre
+        self.setFixedSize(300, 180)  # taille de la fenaitre
 
         self.text = QLabel(self)
         self.text.setFixedSize(200, 200)
@@ -32,13 +33,22 @@ class Window_Menu (QtWidgets.QMainWindow) :
         # self.button_deux_joueur.clicked.connect(self.prenom2)
 
         self.button_valider = QtWidgets.QPushButton("Entrer", self)  # cree un bouton
-        self.button_valider.setFixedSize(100, 50)  # taille du bouton
+        self.button_valider.setFixedSize(150, 50)  # taille du bouton
         font = self.button_valider.font()  # lineedit current font
         font.setPointSize(20)  # change it's size
         self.button_valider.setFont(font)
-        self.button_valider.move(120, 150)  # position du bouton
+        self.button_valider.setFont(QFont('Calibri', 13))
+        self.button_valider.move(280, 150)  # position du bouton
 
         zoneCentrale = QWidget()
+
+        pixmap = QtGui.QPixmap("image4.png")
+        pal = QtGui.QPalette()
+        pal.setBrush(QtGui.QPalette.Background, QtGui.QBrush(pixmap))
+        zoneCentrale.lower()
+        zoneCentrale.stackUnder(self)
+        zoneCentrale.setAutoFillBackground(True)
+        zoneCentrale.setPalette(pal)
 
         # self.con = QtWidgets.QWidget(self.centralwidget)
         # self.con.setGeometry(QtCore.QRect(20, 20, 300, 251))
