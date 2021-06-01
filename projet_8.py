@@ -26,10 +26,10 @@ class Boule(metaclass = ABCMeta):  # une boule (blanche ou colorée), ses caract
 
     def evolution(self, dt,k, eps = 0.5):  # on suppose le mouvement rectiligne uniforme,
         """
-        on suppose le mouvement des boules rectiligne uniforme, en l'absence de collisions (bords ou autres boules).
-        La position est fonction affine du temps
+        on suppose le mouvement des boules rectiligne en l'absence de collisions (bords ou autres boules).
+        La vitesse est une fonction linéaire décroissante du temps
         entrée : float
-        sortie : array -> nouvelles coordonnées de la boule
+        sortie : int
         """
         if self.vx**2 + self.vy**2 < eps :
             self.vx = 0
@@ -45,7 +45,7 @@ class Boule(metaclass = ABCMeta):  # une boule (blanche ou colorée), ses caract
     def rebond(self, bord):
         """
         simule un rebond sur une paroi droite
-        entrée : string caractérisant la paroi sur laquelle il y a rebonb
+        entrée : string caractérisant la paroi sur laquelle il y a rebond
         sortie : la nouvelle vitesse de la boule, après rebond
         """
         if bord in ['N', 'S']:
@@ -232,7 +232,7 @@ class Plateau(list):  # le plateau est un espace délimité, composé d'une list
         for [i, j] in col:
             Boule.coll (self[i],self[j])
             #self[i].vx, self[i].vy, self[j].vx, self[j].vy = self[j].vx + (self[j].vy)/3, self[j].vy, self[i].vx + (self[i].vy)/3, self[i].vy
-            # les boules échangent leur quantité de mouvement quand elles entrent en collision (toutes de masse identiques ici)
+            # les boules échangent leur quantité de mouvement quand elles entrent en collision (toutes de masses identiques ici)
         #print ("colllllllllllllllllllllllllllllllllllllllllllllllllll", col)
 
     def un_coup(self, dt,c,joueur=1):
