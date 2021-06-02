@@ -45,6 +45,12 @@ class Ui_mainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
 
+        self.label0 = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.label0.setObjectName("label2")
+        self.horizontalLayout_2.addWidget(self.label0)
+        spacerItem0 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem0)
+
         self.label = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label)
