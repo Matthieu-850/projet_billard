@@ -14,11 +14,11 @@ class Window_Menu (QtWidgets.QMainWindow) :
         super(Window_Menu, self).__init__(*args, **kwargs)
 
 
-        self.setWindowTitle("Entrez vos prénoms")  # titre de la fenaitre
-        self.setFixedSize(300, 180)  # taille de la fenaitre
+        self.setWindowTitle("Entrez vos prénoms")  # titre de la fenetre
+        self.setFixedSize(300, 185)  # taille de la fenetre
 
         self.text = QLabel(self)
-        self.text.setFixedSize(200, 200)
+        self.text.setFixedSize(30, 235)
         #self.text.move(10,10)
         #self.text.setText("Entrer noms")
         #
@@ -32,13 +32,13 @@ class Window_Menu (QtWidgets.QMainWindow) :
         # self.button_deux_joueur.move(120, 100)  # position du bouton
         # self.button_deux_joueur.clicked.connect(self.prenom2)
 
-        self.button_valider = QtWidgets.QPushButton("Entrer", self)  # cree un bouton
-        self.button_valider.setFixedSize(150, 50)  # taille du bouton
+        self.button_valider = QtWidgets.QPushButton("Lancer la partie", self)  # cree un bouton
+        self.button_valider.setFixedSize(150, 60)  # taille du bouton
         font = self.button_valider.font()  # lineedit current font
         font.setPointSize(20)  # change it's size
         self.button_valider.setFont(font)
-        self.button_valider.setFont(QFont('Calibri', 13))
-        self.button_valider.move(280, 150)  # position du bouton
+        self.button_valider.setFont(QFont('Calibri', 12))
+        self.button_valider.move(80, 200)  # position du bouton
 
         zoneCentrale = QWidget()
 
@@ -55,7 +55,7 @@ class Window_Menu (QtWidgets.QMainWindow) :
         # # self.con.setObjectName("con")
 
         self.prenom1 = QLineEdit(self)
-        self.prenom1.move (20,50)
+        self.prenom1.move (15,50)
         self.prenom2 = QLineEdit(self)
         self.prenom2.move(20, 100)
         self.nb_tour = QLineEdit(self)
@@ -73,7 +73,6 @@ class Window_Menu (QtWidgets.QMainWindow) :
 
         self.button_valider.clicked.connect(self.prenoms)  # ce qu'il se passe
 
-
         self.show()
 
     def prenom2 (self) :
@@ -83,10 +82,14 @@ class Window_Menu (QtWidgets.QMainWindow) :
         p1 = self.prenom1.text()
         p2 = self.prenom2.text()
         nb = int (self.nb_tour.text())
-        self.win_deux = MonAppli(p1,p2,nb)
-        self.win_deux.show()
-        print (p1, p2)
-        self.close ()
+        if nb <1 or type (nb) != int:
+            #self.layout.addRow("Nombre de coups\nEntier positif !!", self.nb_tour)
+            pass
+        else :
+            self.win_deux = MonAppli(p1,p2,nb)
+            self.win_deux.show()
+            print (p1, p2)
+            self.close ()
 
 
 if __name__ == "__main__" :
