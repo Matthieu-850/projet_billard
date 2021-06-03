@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
-from InterfaceBillard import Ui_mainWindow
-from PROJET_a_harmoniser_et_coller_autre_doc_bien_nomme import Partie, Boule_blanche, Boule, Plateau
+from InterfaceBillard_BUISSET_FERRAND import Ui_mainWindow
+from PROJET import Partie, Boule_blanche, Boule, Plateau
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit , QFormLayout, QAction, QFontComboBox
 from PyQt5.QtGui import QFont

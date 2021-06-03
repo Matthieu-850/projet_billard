@@ -18,7 +18,7 @@ class Ui_mainWindow(object):
         mainWindow.setWindowModality(QtCore.Qt.NonModal)
         mainWindow.resize(1123, 835)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("C:\\WPy64-3760\\python-3.7.6.amd64\\../../OneDrive - Ecole Nationale Supérieure de Techniques Avancées Bretagne/UE 2.4-projet/Sujet 05 - Billard/tablelogo.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # icon.addPixmap(QtGui.QPixmap("C:\\WPy64-3760\\python-3.7.6.amd64\\../../OneDrive - Ecole Nationale Supérieure de Techniques Avancées Bretagne/UE 2.4-projet/Sujet 05 - Billard/tablelogo.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         mainWindow.setWindowIcon(icon)
 
         mainWindow.setDockNestingEnabled(False)
