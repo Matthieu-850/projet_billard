@@ -17,19 +17,19 @@ class JeuBillard (QtWidgets.QMainWindow):
         self.ui = Ui_mainWindow()
         self.ui.setupUi(self)
 
-        pixmap = QtGui.QPixmap("carambole_m.jpg")  # on fixe l'image d'arrière-plan
+        pixmap = QtGui.QPixmap("carambole_m.jpg")  # on charge l'image d'arrière-plan
         pal = QtGui.QPalette()
         pal.setBrush(QtGui.QPalette.Background, QtGui.QBrush(pixmap))
         self.ui.con.lower()
         self.ui.con.stackUnder(self)
-        self.ui.con.setAutoFillBackground(True)
+        self.ui.con.setAutoFillBackground(True) #et on la fixe
         self.ui.con.setPalette(pal)
 
         self.i = 0  # compteur qui représente le joueur qui est train de jouer (pair ou impair)
         self.ANA = [] # analyse l'issue du coup: si le joueur à réussi à taper les 2 boules ou non
         self.MVT = []  # permet de vérifier qu'il y a toujours des boules en mouvement
 
-        self.painter = QtGui.QPainter() # on instancie un premier peintre, pour les boules + le points qui désigne le joueur + le point de visée
+        self.painter = QtGui.QPainter() # on instancie un premier peintre, pour les boules + le point qui désigne le joueur + le point de visée
         qp = self.painter
 
         self.painter2 = QtGui.QPainter() # on instancie un second peintre pour la queue
@@ -40,12 +40,12 @@ class JeuBillard (QtWidgets.QMainWindow):
         self.ehfw, self.egfw = 10, 10  # ecart haut fenetre - widget, ecart gauche fenetre - widget
         self.by, self.bx = self.hw - self.bande_n - self.bande_s, self.lw - self.bande_e - self.bande_o  # taille du tapis, correspondent à self.bn et self.be dans la classe plateau
 
-        self.distx, self.disty = 0,0  # à nommer mieux
+        self.distx, self.disty = 0,0  # distance de la queue à la boule tirée (initialisée à 0)
 
         self.table = Partie(self.nb_coups, 0.005, self.bx, self.by) # On instancie la classe Partie, qui contient toutes
         # les méthodes et variables d'instances nécessaire au fonctionnement du jeu de billard
 
-        self.xp, self.yp = -3,-3  # on initialise ces valeurs à -3 car elles ne vaudront plus jamais -3 une fois la partie lancer :
+        self.xp, self.yp = -3,-3  # on initialise ces valeurs à -3 car elles ne vaudront plus jamais -3 une fois la partie lancee :
         # permet à la fonction de dessin dessinJeu de voir qu'elle ne doit pas afficher le point de visée dès le lancement du jeu.
         self.xr, self.yr = 0,0
         self.table.plat.queue.x, self.table.plat.queue.y = self.table.plat[self.i % 2].x + 86.2, self.table.plat[self.i % 2].y + 86.2
@@ -56,7 +56,7 @@ class JeuBillard (QtWidgets.QMainWindow):
 
         self.ui.Bouton_Demarrer.clicked.connect(self.demarrer)
         self.ui.Bouton_Jouer.clicked.connect(self.jouer)
-        # lorsque que le bouton Bouton_Demarrer resp. Bouton_Jouer sera enclenché, on appellera la méthode démarrer resp. jouer.
+        # lorsque que le bouton Bouton_Demarrer , resp. Bouton_Jouer sera enclenché, on appellera la méthode démarrer , resp. jouer.
 
         self.timer = QtCore.QTimer()  # on instancie la classe QTImer : on crée un timer self.timer
         self.timer.timeout.connect(self.timer_0) # chaque fois que ce timer "tombe à 0", on appele la méthode timer_0.
