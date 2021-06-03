@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 from interfaceBon import Ui_mainWindow
-from projet_8 import Partie, Boule_blanche, Boule, Plateau
+from PROJET import Partie, Boule_blanche, Boule, Plateau
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit , QFormLayout, QAction, QFontComboBox
 from PyQt5.QtGui import QFont
